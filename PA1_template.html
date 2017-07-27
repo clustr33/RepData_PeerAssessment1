@@ -166,7 +166,7 @@ activity.data.daily.activity &lt;- ddply(activity.data, c(&quot;interval&quot;),
 <p>Plot the daily activity pattern.</p>
 <pre class="r"><code>ggplot(activity.data.daily.activity, aes(x = activity.data.daily.activity$interval,
                                          y = activity.data.daily.activity$mean)) +
-        geom_line() + labs(title=&quot;Mean number of daily steps&quot;, x = &quot;Interval&quot;, y = &quot;Mean step count&quot;)</code></pre>
+        geom_line() + labs(title=&quot;Mean daily activity pattern&quot;, x = &quot;Interval&quot;, y = &quot;Mean step count&quot;)</code></pre>
 <p><img src="figure/unnamed-chunk-9-1.png" /><!-- --></p>
 <p>Calculate the maximum activity interval.</p>
 <pre class="r"><code>activity.data.daily.activity[which.max(activity.data.daily.activity$mean), &quot;interval&quot;]</code></pre>
@@ -194,27 +194,34 @@ head(activity.data.complete.dailysums)</code></pre>
 <pre class="r"><code>summary(activity.data.complete.dailysums)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##      41    9819   10770   10770   12810   21190</code></pre>
-<p>The mean value has seen an increase compared to the original data with NA’s omitted. Also, from the histogram it can be seen that the 0-bin decrased a lot. It is because in the original data, the NA’s were treated as zeroes, while in the imputed data the NA’s were approximated with the mean value of that interval. The mean values were affected with NA’s being treated as zero, while the median was not.</p>
+<p>The mean value has seen an increase compared to the original data, it is now the same as the median. The distribution now has zero skewness, which can also be seen from the histogram.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<p>Construct a new column (<em>part.of.the.week</em>) based on lookup-table. The date format can be transformed to literal weekday with the <em>weekdays</em> function. The literal weekday will be used as an index pointer to the lookup-table.</p>
+<p>Construct a new column (<em>$part.of.the.week</em>) based on lookup-table. The date variable can be transformed to literal weekday with the <em>weekdays</em> function. The literal weekday will be used as an index pointer to the lookup-table.</p>
 <pre class="r"><code>part.of.the.week.lookup &lt;- cbind(
         c(&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;),
         c(&quot;Weekday&quot;,&quot;Weekday&quot;,&quot;Weekday&quot;,&quot;Weekday&quot;,&quot;Weekday&quot;,&quot;Weekend&quot;,&quot;Weekend&quot;))
 
 activity.data.complete$part.of.the.week &lt;- part.of.the.week.lookup[
         match(weekdays(activity.data.complete$date), part.of.the.week.lookup[,1])
-        , 2]    </code></pre>
+        , 2]
+head(activity.data.complete)</code></pre>
+<pre><code>##       steps       date interval part.of.the.week
+## 1  1.716981 2012-10-01        0          Weekday
+## 2  0.000000 2012-10-02        0          Weekday
+## 3  0.000000 2012-10-03        0          Weekday
+## 4 47.000000 2012-10-04        0          Weekday
+## 5  0.000000 2012-10-05        0          Weekday
+## 6  0.000000 2012-10-06        0          Weekend</code></pre>
 <p>Now calculate the mean step count of each interval across all days with the complete data set.</p>
 <pre class="r"><code>activity.data.complete.mean.intervals &lt;- ddply(activity.data.complete, c( &quot;interval&quot;, &quot;part.of.the.week&quot;),
                                                summarize,
-                                               meansteps = mean(steps, na.rm = TRUE)
-)</code></pre>
+                                               meansteps = mean(steps, na.rm = TRUE))</code></pre>
 <p>Using ggplot’s facets function, it is now easy to separate the data with <em>part.of.the.week</em> variable.</p>
 <pre class="r"><code>ggplot(activity.data.complete.mean.intervals) + 
         geom_line(aes(y = meansteps, x = interval), stat=&quot;identity&quot;) +
-        labs(title=&quot;Mean step count across intervals, weekdays vs. weekend&quot;, 
+        labs(title=&quot;Mean daily activity pattern, weekdays vs. weekend&quot;, 
              x = &quot;Interval&quot;, 
              y = &quot;Mean step count&quot;) +
         facet_grid(facets = part.of.the.week ~ ., scales=&quot;free&quot;)</code></pre>
