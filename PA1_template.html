@@ -150,7 +150,7 @@ head(activity.data.dailysums)</code></pre>
 <p>Plot a histogram with ggplot2 showing the distribution of daily step count.</p>
 <pre class="r"><code>library(ggplot2)
 qplot(activity.data.dailysums, binwidth=1000, xlab=&quot;Daily step count&quot;)</code></pre>
-<p><img src="figure/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="figure/unnamed-chunk-6-1.png" /><!-- --></p>
 <p>Calculate the mean and median using the <em>summary</em> function.</p>
 <pre class="r"><code>summary(activity.data.dailysums)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -167,7 +167,7 @@ activity.data.daily.activity &lt;- ddply(activity.data, c(&quot;interval&quot;),
 <pre class="r"><code>ggplot(activity.data.daily.activity, aes(x = activity.data.daily.activity$interval,
                                          y = activity.data.daily.activity$mean)) +
         geom_line() + labs(title=&quot;Mean number of daily steps&quot;, x = &quot;Interval&quot;, y = &quot;Mean step count&quot;)</code></pre>
-<p><img src="figure/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="figure/unnamed-chunk-9-1.png" /><!-- --></p>
 <p>Calculate the maximum activity interval.</p>
 <pre class="r"><code>activity.data.daily.activity[which.max(activity.data.daily.activity$mean), &quot;interval&quot;]</code></pre>
 <pre><code>## [1] 835</code></pre>
@@ -190,7 +190,7 @@ head(activity.data.complete.dailysums)</code></pre>
 ##   10766.19     126.00   11352.00   12116.00   13294.00   15420.00</code></pre>
 <p>Plot a histogram of the data.</p>
 <pre class="r"><code>qplot(activity.data.complete.dailysums, binwidth=1000, xlab=&quot;Daily step count&quot;)</code></pre>
-<p><img src="figure/unnamed-chunk-14-1.png" width="672" /> The mean and median step counts can be viewed with the <em>summary</em> function.</p>
+<p><img src="figure/unnamed-chunk-14-1.png" /><!-- --> The mean and median step counts can be viewed with the <em>summary</em> function.</p>
 <pre class="r"><code>summary(activity.data.complete.dailysums)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##      41    9819   10770   10770   12810   21190</code></pre>
@@ -218,7 +218,7 @@ activity.data.complete$part.of.the.week &lt;- part.of.the.week.lookup[
              x = &quot;Interval&quot;, 
              y = &quot;Mean step count&quot;) +
         facet_grid(facets = part.of.the.week ~ ., scales=&quot;free&quot;)</code></pre>
-<p><img src="figure/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="figure/unnamed-chunk-18-1.png" /><!-- --></p>
 </div>
 
 
