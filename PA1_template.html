@@ -224,8 +224,9 @@ head(activity.data.complete)</code></pre>
         labs(title=&quot;Mean daily activity pattern, weekdays vs. weekend&quot;, 
              x = &quot;Interval&quot;, 
              y = &quot;Mean step count&quot;) +
-        facet_grid(facets = part.of.the.week ~ ., scales=&quot;free&quot;)</code></pre>
+        facet_grid(facets = part.of.the.week ~ ., scales=&quot;fixed&quot;)</code></pre>
 <p><img src="figure/unnamed-chunk-18-1.png" /><!-- --></p>
+<p>From the plots it can be seen that the activity is more evenly distributed on weekends than on weekdays, it also starts and ends later.</p>
 </div>
 
 

@@ -201,7 +201,9 @@ ggplot(activity.data.complete.mean.intervals) +
         labs(title="Mean daily activity pattern, weekdays vs. weekend", 
              x = "Interval", 
              y = "Mean step count") +
-        facet_grid(facets = part.of.the.week ~ ., scales="free")
+        facet_grid(facets = part.of.the.week ~ ., scales="fixed")
 ```
 
 ![](figure/unnamed-chunk-18-1.png)<!-- -->
+
+From the plots it can be seen that the activity is more evenly distributed on weekends than on weekdays, it also starts and ends later.
