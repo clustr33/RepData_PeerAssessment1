@@ -1,8 +1,9 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: 'Reproducible Research: Peer Assessment 1'
+keep_md: yes
 output: 
-html_document:
-keep_md: true
+  html_document: 
+    self_contained: no
 ---
 ## Initialization
 Start by setting up the parameters for external figures.
